@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NCERT Doubt Solver</title>
+</head>
+<body>
+  <h2>NCERT Doubt Solver</h2>
+
+  <input id="question" placeholder="Ask your doubt here" />
+  <button onclick="ask()">Ask</button>
+
+  <p id="answer"></p>
+
+  <script>
+    async function ask() {
+      const q = document.getElementById("question").value;
+
+      const response = await fetch("http://127.0.0.1:7860/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+
+      const data = await response.json();
+      document.getElementById("answer").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
